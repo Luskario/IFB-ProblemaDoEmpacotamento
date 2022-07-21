@@ -19,7 +19,7 @@ int firstFit(int itens[], int capacidade, int qtd){
                 break;
             }
         }
-        if(!aux && itens[i] <= capacidade){
+        if(!aux){
             caixas.push_back(capacidade - itens[i]);
         }
     }
@@ -44,4 +44,27 @@ int nextFit(int itens[], int capacidade, int qtd){
     return aux;
 }
 
-int bestFit(int itens[], int capacidade, int qtd);
+int bestFit(int itens[], int capacidade, int qtd){
+    int aux, i, j, menor, indice;
+    std::vector<int> caixas;
+    caixas.push_back(capacidade);
+
+    for(i=0; i<qtd;i++){
+        aux = 0;
+        menor = capacidade;
+        for(j=0; j<caixas.size(); j++){
+            if(caixas[j]- itens[i] < menor && caixas[j]- itens[i]>=0){
+                aux = 1;
+                indice = j;
+            }
+        }
+        if(aux){
+            caixas[indice] -= itens[i];
+        } else {
+            caixas.push_back(capacidade - itens[i]);
+        }
+    }
+    
+    return caixas.size();
+
+}
