@@ -3,29 +3,33 @@
 #include "Processamento.h"
 #include "Metodos.h"
 #include "Leitura.h"
+#include <time.h>
 
 using namespace std;
 
+void executar(string Entrada, int resp[], float tempo[]){
 
-void executar(string Entrada){
-
-    ifstream arq("binpacking-instancias/input/Waescher_TEST0022.txt");
+    ifstream arq(Entrada);
     
     int qtd = lerDado(arq), capacidade = lerDado(arq);
     int itens[qtd];
+    clock_t timer;
 
     lerPesos(arq, itens, qtd);
 
-    //---------------------------------------------------------------//
+    timer = clock();
+    resp[0] = firstFit(itens, capacidade, qtd);
+    timer = clock() - timer;
+    tempo[0] = ((float)timer/CLOCKS_PER_SEC);
 
-    //int vezes, i, j;
+    timer = clock();
+    resp[1] = nextFit(itens, capacidade, qtd);
+    timer = clock() - timer;
+    tempo[1] = ((float)timer/CLOCKS_PER_SEC);
 
-    //for(i=0; i<vezes; i++){
-    //    for(j=0; j<3; j++){
-
-    //    }
-    //}
-
-    //cout << firstFit(itens, capacidade, qtd) << endl;
+    timer = clock();
+    resp[2] = bestFit(itens, capacidade, qtd);
+    timer = clock() - timer;
+    tempo[2] = ((float)timer/CLOCKS_PER_SEC);
 
 }

@@ -6,16 +6,43 @@
 
 using namespace std;
 
+struct resposta{
+    int valor[3];
+    float mediaTempo[3];
+};
+typedef struct resposta Resposta;
+
 int main (){
 
-    ifstream arq("binpacking-instancias/input/Waescher_TEST0022.txt");
+    string arqs[9];
     
+    Resposta resp[9] = {{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}};
 
-    executar("");
+    int i, j, x, vezes = 1;
+    int valor[3], valorEficaz[9];
+    float tempo[3];
 
-    int teste[5] = {2, 4 , 1, 2, 1};
-    //cout << firstFit(teste, 5, 5) <<endl;
-    //cout << nextFit(teste, 5, 5) <<endl;
-    //cout << bestFit(teste, 5, 5) <<endl;
+    for(i=0; i < vezes; i++){
+        for(j=0; j<9; j++){
+
+            string entrada = "binpacking-instancias/input/" + arqs[j];
+            executar(entrada,valor,tempo);
+
+            for(x=0; x<3; x++){
+                resp[j].mediaTempo[x]   += (tempo[x]*1000/vezes);
+                resp[j].valor[x]        = valor[x];
+            }
+
+        }
+    }
+
+    for(i=0; i<9; i++){
+        printf("\n %s \n\n", arqs[i]);
+        for(j=0; j<3; j++){
+            printf("tempo: %.2f ms ----- Valor Total: %d ", 
+            (resp[i].mediaTempo[j]), resp[i].valor[j],(resp[i].valor[j]/valorEficaz[i]));
+        }
+    }
+
     return 0;
 }

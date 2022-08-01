@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void executar(string Entrada);
+void executar(string Entrada, int resp[], float tempo[]);
 
 
 #endif

@@ -21,24 +21,3 @@ void lerPesos(ifstream& arq, int pesos[], int n){
     }
     
 }
-
-int lerSolucao(string path, string arquivo){
-    char delimitador = ',';
-    ifstream arq(path);
-
-    string dado;
-    int valor = 0;
-    if(!arq.is_open()){
-        cout <<"não aberto";
-    }
-
-    while(getline(arq, dado, delimitador)){
-        cout << dado << endl;
-        if(dado == arquivo){
-            cout << "achado";
-        }
-    }
-
-    return valor;
-
-}
